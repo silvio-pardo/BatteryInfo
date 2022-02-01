@@ -25,12 +25,7 @@ public:
 		LONG rate;
 	};
 
-	struct BatteryItem {
-		ULONG device_tag;
-		BatteryInfo device_info;
-	};
-
-	void getBatteryList();
+	std::vector<BatteryInfo> getBatteryList();
 protected:
 	BatteryInfo getBatteryInfo(const HDEVINFO& hd_ev, SP_DEVICE_INTERFACE_DATA& sp_device);
 };

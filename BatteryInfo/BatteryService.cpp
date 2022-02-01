@@ -117,18 +117,21 @@ BatteryService::BatteryInfo BatteryService::getBatteryInfo(const HDEVINFO& hd_ev
         return returnValue;
     }
 }
-void BatteryService::getBatteryList() {
+std::vector<BatteryService::BatteryInfo> BatteryService::getBatteryList() {
     //TODO return a vector of battery and catch all ex
     try 
     {
+        std::vector<BatteryService::BatteryInfo> returnValue;
         HDEVINFO hdev = SetupDiGetClassDevs(&GUID_DEVICE_BATTERY, 0, 0, DIGCF_PRESENT | DIGCF_DEVICEINTERFACE);
         SP_DEVICE_INTERFACE_DATA did = { 0 };
         did.cbSize = sizeof(did);
         int counterIndex = 0;
         while(SetupDiEnumDeviceInterfaces(hdev, 0, &GUID_DEVICE_BATTERY, counterIndex, &did)) {
             BatteryService::BatteryInfo batteryData = this->getBatteryInfo(hdev, did);
+            returnValue.push_back(batteryData);
             counterIndex++;
         }
+        return returnValue;
     }
     catch (...) {
         std::printf("error");
