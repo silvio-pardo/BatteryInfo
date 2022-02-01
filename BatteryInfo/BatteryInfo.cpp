@@ -102,4 +102,5 @@ int main()
             break;
         }
     }
+    Sleep(10000);
 }
