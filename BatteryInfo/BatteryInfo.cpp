@@ -4,6 +4,6 @@ int main()
 {
     std::cout << "Start..\n";
     BatteryService service = BatteryService();
-    service.getBatteryList();
+    service.getSystemInfo();
     Sleep(10000);
 }

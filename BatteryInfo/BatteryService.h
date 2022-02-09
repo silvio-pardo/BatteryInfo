@@ -8,6 +8,13 @@
 #include <array>
 #include <vector>
 
+#define _WIN32_DCOM
+#include <ole2.h>
+#include <oleauto.h>
+#include <comdef.h>
+#include <wbemidl.h>
+#pragma comment(lib, "wbemuuid.lib")
+
 class BatteryService
 {
 public:
@@ -25,8 +32,17 @@ public:
 		LONG rate;
 	};
 
+	struct SystemInfo {
+		bool errors = false;
+		std::string model;
+		std::string name;
+		std::string manufacturer;
+	};
+
 	std::vector<BatteryInfo> getBatteryList();
+	SystemInfo getSystemInfo();
 protected:
 	BatteryInfo getBatteryInfo(const HDEVINFO& hd_ev, SP_DEVICE_INTERFACE_DATA& sp_device);
+	
 };
 
