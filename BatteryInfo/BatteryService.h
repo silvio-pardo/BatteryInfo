@@ -21,7 +21,7 @@ public:
 	BatteryService(){}
 	
 	struct BatteryInfo {
-		bool errors;
+		bool errors = false;
 		std::string device_name;
 		ULONG designed_capacity;
 		ULONG full_charged_capacity;
